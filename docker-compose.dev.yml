@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  dashboard:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./project-dev-way-dashboard
+    command: yarn start:dev
+    stdin_open: true
+    tty: true
+    volumes:
+      - /app/node_modules
+      - ./project-dev-way-dashboard/src:/app/src
+
   api:
     build:
       dockerfile: Dockerfile.dev

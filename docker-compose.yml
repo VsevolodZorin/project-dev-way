@@ -1,30 +1,42 @@
 version: "3"
 
 services:
+  dashboard:
+    build:
+      dockerfile: Dockerfile
+      context: ./project-dev-way-dashboard
+    container_name: project-dev-way-dashboard
+    ports:
+      - "3020:3020"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - apiBaseUrl=http://localhost:4000
+      - PORT=3020
+    restart: unless-stopped
+    command: serve -s build -l 3020
+
   api:
     build:
       dockerfile: Dockerfile
       context: ./project-dev-way-api
     container_name: project-dev-way-api
-    command: yarn start:prod
     restart: unless-stopped
     ports:
       - "4000:4000"
       - "9229:9229"
     environment:
       - PORT=4000
-    logging:
-      driver: none
+    command: yarn start:prod
     depends_on:
-      - auth_db
+      - api_db
 
-  auth_db:
+  api_db:
     image: mongo:latest
     container_name: project-dev-way-api-db
+    logging:
+      driver: none
     volumes:
       - mongodb_api:/data/db
 
 volumes:
   mongodb_api:
-
-
