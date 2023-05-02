@@ -23,7 +23,6 @@ services:
     restart: unless-stopped
     ports:
       - "5000:5000"
-      - "9229:9229"
     # environment:
     #   - PORT=5000
     #   - DB_HOST=auth_db
@@ -44,7 +43,6 @@ services:
     restart: unless-stopped
     ports:
       - "4000:4000"
-      - "9229:9229"
     environment:
       - PORT=4000
     command: yarn start:prod
