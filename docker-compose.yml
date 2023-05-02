@@ -53,7 +53,7 @@ services:
 
   auth_db:
     image: postgres:latest
-    container_name: project-dev-way-auth_db
+    container_name: project-dev-way-auth-db
     restart: unless-stopped
     ports:
       - "5432:5432"
@@ -62,7 +62,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=project-dev-way-auth-db
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
   api_db:
     image: mongo:latest
