@@ -12,6 +12,12 @@ services:
       - /app/node_modules
       - ./project-dev-way-dashboard/src:/app/src
 
+  auth:
+    command: >
+      sh -c "npm run db:init && npm run start:dev"
+    volumes:
+      - ./project-dev-way-auth/src:/app/src
+
   api:
     build:
       dockerfile: Dockerfile.dev
